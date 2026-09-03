@@ -6,10 +6,12 @@ Verified history for Lira RDP Windows agent builds. The archive separates comple
 
 ## Complete verified build history
 
-The repository records 44 production agent builds from 2.6.75 through 2.7.31. Test-only packages are excluded.
+The repository records 46 production agent builds from 2.6.75 through 2.7.33. Test-only packages are excluded.
 
 | Version | Date | Record |
 | --- | --- | --- |
+| 2.7.33 | 2026-09-03 | Detailed release notes below. |
+| 2.7.32 | 2026-09-03 | Detailed release notes below. |
 | 2.7.31 | 2026-08-26 | Detailed release notes below. |
 | 2.7.30 | 2026-08-26 | Packaged build verified in the retained artifact archive; no standalone public change summary was retained. |
 | 2.7.29 | 2026-08-26 | Packaged build verified in the retained artifact archive; no standalone public change summary was retained. |
@@ -58,6 +60,26 @@ The repository records 44 production agent builds from 2.6.75 through 2.7.31. Te
 ## Detailed release notes
 
 The entries below are the releases for which a verified customer-facing change summary is retained. The newest release appears first.
+
+### 2.7.33 — 2026-09-03
+
+**Maintenance release — Reliable updater failure reporting**
+
+- Every updater exit path now records the current target version and exact failure.
+- Stale updater results from an earlier target are ignored so they cannot be reported as the outcome of a newer update.
+- The signed package SHA-256 is `945b3e71ca582ba24fc94d5da494baa9ac98495a26fcbec251979ffc6eba88cd`; its exact size is `2,037,756` bytes.
+- The RSA-PSS manifest and all six Authenticode release artifacts verified. Controlled Windows Server 2016 and 2022 canaries installed the build and completed a signed read-only diagnostics command.
+
+### 2.7.32 — 2026-09-03
+
+**Security release — Stronger update, command, identity, and MFA safeguards**
+
+- Updates require an RSA-PSS/SHA-256 signed manifest, exact hash and size checks, HTTPS same-origin delivery, monotonic version progression, and Authenticode validation under the pinned Lira publisher.
+- Remote commands are bound to the individual agent and command content, signed with an expiry, checked against a local allowlist, and protected by a durable replay ledger across channel fallback and service restart.
+- HTTP and WebSocket authentication no longer accept the legacy shared agent token. Installer enrollment uses a short-lived credential and no preselected durable identity.
+- Administrators can select compatibility `fail_open` or strict `fail_closed` behavior after testing independent recovery. In the protected fail-closed path, the Credential Provider Filter does not fall through to another password-only provider.
+- MFA identities preserve Windows domain or UPN qualification so equally named accounts in different domains remain separate.
+- [Read the complete security engineering report](../security/engineering-2026-09-03.md).
 
 ### 2.7.31 — 2026-08-26
 

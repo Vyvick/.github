@@ -6,6 +6,17 @@ This dated public platform history begins on 2026-08-24, when the customer-facin
 
 [View the release notes on vyvick.com](https://vyvick.com/en/platform-release-notes.html)
 
+
+## 2026-09-03 — Security hardening and staged agent rollout
+
+- Agent command delivery now uses per-agent HMAC-SHA256 envelopes with expiry, agent binding, a local command allowlist, and a durable at-most-once replay ledger.
+- The legacy shared agent token has been retired from HTTP and WebSocket authentication; personalized installers use short-lived enrollment credentials.
+- MFA policy now exposes explicit compatibility `fail_open` and strict `fail_closed` behavior. The Windows Credential Provider Filter prevents fallback to another password-only provider in the protected fail-closed path; Windows LSA remains responsible for credential validation.
+- TOTP secret storage, phishing limitations, signed-update trust, independent recovery requirements, and the privileged control-plane boundary are now documented explicitly.
+- The full backend suite completed with 545 passed and one opt-in PostgreSQL test skipped; that direct PostgreSQL 16 RLS test passed separately against a disposable instance.
+- Agent 2.7.33 passed staged update and signed read-only command canaries on Windows Server 2016 and Windows Server 2022. The global agent target remains 2.7.31 while trust-root provisioning and the remaining live matrix continue.
+- [Read the complete security engineering report](../security/engineering-2026-09-03.md).
+
 ## 2026-09-02 — Agent connection reliability
 
 - Server-side routing for the primary live agent channel has been corrected for installations that had switched to polling fallback.
