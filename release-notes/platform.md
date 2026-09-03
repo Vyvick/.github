@@ -2,6 +2,8 @@
 
 Customer-facing updates to the Lira RDP portal and service platform. Windows agent builds are documented separately. The newest update appears first.
 
+This dated public platform history begins on 2026-08-24, when the customer-facing release series was introduced. Earlier engineering work is not reconstructed as release history without a retained public release record.
+
 [View the release notes on vyvick.com](https://vyvick.com/en/platform-release-notes.html)
 
 ## 2026-09-02 — Agent connection reliability
