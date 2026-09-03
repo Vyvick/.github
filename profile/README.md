@@ -4,7 +4,7 @@
 
 <p align="center"> Windows Server security, RDP protection, and infrastructure automation. </p>
 
-<p align="center"> <a href="https://vyvick.com/en/">Website</a> · <a href="https://vyvick.com/en/services/rdp-security.html">Lira RDP Security</a> · <a href="https://lira.vyvick.com/demo/?lang=en">Interactive demo</a> · <a href="https://vyvick.com/en/security.html">Security Engineering</a> · <a href="https://t.me/VyvickTechnology">Telegram</a> </p>
+<p align="center"> <a href="https://vyvick.com/en/">Website</a> · <a href="https://vyvick.com/en/services/rdp-security.html">Lira RDP Security</a> · <a href="https://lira.vyvick.com/demo/?lang=en">Interactive demo</a> · <a href="https://vyvick.com/en/security.html">Security Engineering</a> · <a href="https://github.com/Vyvick/.github/blob/main/release-notes/platform.md">Platform releases</a> · <a href="https://github.com/Vyvick/.github/blob/main/release-notes/windows-agent.md">Agent releases</a> · <a href="https://t.me/VyvickTechnology">Telegram</a> </p>
 
 Engineering for infrastructure that must keep working
 
@@ -32,6 +32,8 @@ Interactive demo
 Operational metrics
 Getting started
 Security Engineering and assurance
+Platform release notes
+Windows agent release notes
 Partner program for MSPs and integrators
 Lira RDP Security on SourceForge
 Engineering background
