@@ -70,8 +70,8 @@ allowed to interrupt the event-collection iteration.
 The full backend regression completed with `549 passed, 1 skipped`. Twenty-two
 of 25 active agents now report 2.7.34 and all twenty-two completed a signed,
 read-only `windows_firewall_check` command. Their collectors have no reported
-error; quiet agents are at checkpoint=head and the active backlog samples are
-advancing normally.
+error. Final verification showed checkpoint=head and pending=0 for all 25
+active agents, including the three retained on 2.7.31.
 
 The remaining three agents continue safely on 2.7.31. One has reachable WinRM
 but rejected the supplied administrator credentials, and two have no WinRM
