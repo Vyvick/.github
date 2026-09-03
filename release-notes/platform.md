@@ -7,6 +7,16 @@ This dated public platform history begins on 2026-08-24, when the customer-facin
 [View the release notes on vyvick.com](https://vyvick.com/en/platform-release-notes.html)
 
 
+## 2026-09-04 — Agent event-collection compatibility fix
+
+- During the staged 2.7.33 rollout, agents continued to heartbeat while their Windows Security event checkpoints stopped advancing.
+- The root cause was a response-contract mismatch: the idle update manifest returned null numeric fields that 2.7.33 deserialized as required integers. The update-check exception interrupted the collection iteration.
+- The backend now returns stable numeric idle values. Existing 2.7.33 agents resumed automatically from their durable checkpoints; Windows Security logs were not cleared.
+- Agent 2.7.34 accepts nullable idle-manifest fields defensively and isolates all update-check failures from event collection.
+- Agent 33 completed the 2.7.34 canary, caught up to checkpoint=head, and executed a signed read-only command. The global target remains 2.7.31.
+- Full backend regression: 548 passed, one opt-in test skipped. [Read the incident engineering record](../security/incident-2026-09-04-agent-event-collection.md).
+
+
 ## 2026-09-03 — Security hardening and staged agent rollout
 
 - Agent command delivery now uses per-agent HMAC-SHA256 envelopes with expiry, agent binding, a local command allowlist, and a durable at-most-once replay ledger.

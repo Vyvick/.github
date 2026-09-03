@@ -6,10 +6,11 @@ Verified history for Lira RDP Windows agent builds. The archive separates comple
 
 ## Complete verified build history
 
-The repository records 46 production agent builds from 2.6.75 through 2.7.33. Test-only packages are excluded.
+The repository records 47 production agent builds from 2.6.75 through 2.7.34. Test-only packages are excluded.
 
 | Version | Date | Record |
 | --- | --- | --- |
+| 2.7.34 | 2026-09-04 | Event-collection compatibility and fault-isolation hotfix. |
 | 2.7.33 | 2026-09-03 | Detailed release notes below. |
 | 2.7.32 | 2026-09-03 | Detailed release notes below. |
 | 2.7.31 | 2026-08-26 | Detailed release notes below. |
@@ -60,6 +61,17 @@ The repository records 46 production agent builds from 2.6.75 through 2.7.33. Te
 ## Detailed release notes
 
 The entries below are the releases for which a verified customer-facing change summary is retained. The newest release appears first.
+
+### 2.7.34 — 2026-09-04
+
+**Reliability hotfix — Event collection is independent of update checks**
+
+- Idle update-manifest numeric fields are nullable-compatible in the agent.
+- Forced, heartbeat-triggered, and scheduled update-check failures are contained and logged; they can no longer abort the Security event-collection iteration.
+- The canary deployment path preflights the signed manifest inside the running backend container before enqueueing an update.
+- Update package SHA-256: `9ba2dee981b5380908bb40c16bbdee9ad508d7fd3c52b0253d98485d72465fc8`; exact size: `2,038,451` bytes.
+- All six Windows artifacts passed Authenticode validation. Agent 33 reached checkpoint=head and completed signed read-only command 2450. Full backend regression: 548 passed, one skipped.
+- [Read the incident engineering record](../security/incident-2026-09-04-agent-event-collection.md).
 
 ### 2.7.33 — 2026-09-03
 
