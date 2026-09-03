@@ -43,9 +43,12 @@ allowed to interrupt the event-collection iteration.
 3. Agent 2.7.34 isolates forced, heartbeat-triggered, and scheduled update-check
    failures from Security event collection and records a Windows Event Log
    warning instead of aborting the collection iteration.
-4. The canary deployment script now copies release artifacts into the running
-   backend container and validates the signed manifest there before enqueueing
-   an update command.
+4. The canary deployment script installs release artifacts into the host
+   release directory, which is mounted read-only into the backend container,
+   and validates the signed manifest inside the container before enqueueing an
+   update command.
+5. Heartbeat now treats the version of the running binary as authoritative and
+   clears a stale update failure when that version equals the requested target.
 
 ## Verification
 
@@ -64,6 +67,18 @@ allowed to interrupt the event-collection iteration.
 
 ## Rollout state
 
-Agent 33 is the sole 2.7.34 canary. The global target remains 2.7.31. Further
-fleet rollout remains staged until the canary finishes catch-up and the full
-regression suite completes.
+The full backend regression completed with `549 passed, 1 skipped`. Twenty-two
+of 25 active agents now report 2.7.34 and all twenty-two completed a signed,
+read-only `windows_firewall_check` command. Their collectors have no reported
+error; quiet agents are at checkpoint=head and the active backlog samples are
+advancing normally.
+
+The remaining three agents continue safely on 2.7.31. One has reachable WinRM
+but rejected the supplied administrator credentials, and two have no WinRM
+route from the deployment workstation. A direct 2.7.31 agent-channel
+canary downloaded and verified the package hash, then correctly rejected the
+new binaries with WinTrust `0x800B010A` because the independently distributed
+Lira signing root is absent. No trust verification was weakened and the
+working 2.7.31 installation was preserved. The global target remains 2.7.31
+until those three hosts receive the signing root through an authenticated
+administrator or console path.

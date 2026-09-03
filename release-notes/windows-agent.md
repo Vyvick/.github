@@ -70,7 +70,7 @@ The entries below are the releases for which a verified customer-facing change s
 - Forced, heartbeat-triggered, and scheduled update-check failures are contained and logged; they can no longer abort the Security event-collection iteration.
 - The canary deployment path preflights the signed manifest inside the running backend container before enqueueing an update.
 - Update package SHA-256: `9ba2dee981b5380908bb40c16bbdee9ad508d7fd3c52b0253d98485d72465fc8`; exact size: `2,038,451` bytes.
-- All six Windows artifacts passed Authenticode validation. Agent 33 reached checkpoint=head and completed signed read-only command 2450. Full backend regression: 548 passed, one skipped.
+- All six Windows artifacts passed Authenticode validation. Twenty-two of 25 active agents run 2.7.34 and completed signed read-only checks; three remain safely on 2.7.31 pending independent signing-root provisioning. Full backend regression: 549 passed, one skipped.
 - [Read the incident engineering record](../security/incident-2026-09-04-agent-event-collection.md).
 
 ### 2.7.33 — 2026-09-03
