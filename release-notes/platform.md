@@ -13,7 +13,7 @@ This dated public platform history begins on 2026-08-24, when the customer-facin
 - The root cause was a response-contract mismatch: the idle update manifest returned null numeric fields that 2.7.33 deserialized as required integers. The update-check exception interrupted the collection iteration.
 - The backend now returns stable numeric idle values. Existing 2.7.33 agents resumed automatically from their durable checkpoints; Windows Security logs were not cleared.
 - Agent 2.7.34 accepts nullable idle-manifest fields defensively and isolates all update-check failures from event collection.
-- Twenty-two of 25 active agents now run 2.7.34 and completed signed read-only command checks. Three remain safely on 2.7.31 pending independent signing-root provisioning; the global target remains 2.7.31.
+- Twenty-two of 25 active agents now run 2.7.34 and completed signed read-only command checks. The global target is now 2.7.34; three agents failed closed on missing independent signing-root trust and remain safely online on 2.7.31 pending manual provisioning.
 - Full backend regression: 549 passed, one opt-in test skipped. [Read the incident engineering record](../security/incident-2026-09-04-agent-event-collection.md).
 
 

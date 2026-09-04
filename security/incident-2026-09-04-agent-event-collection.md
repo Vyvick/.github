@@ -79,6 +79,8 @@ route from the deployment workstation. A direct 2.7.31 agent-channel
 canary downloaded and verified the package hash, then correctly rejected the
 new binaries with WinTrust `0x800B010A` because the independently distributed
 Lira signing root is absent. No trust verification was weakened and the
-working 2.7.31 installation was preserved. The global target remains 2.7.31
-until those three hosts receive the signing root through an authenticated
+working 2.7.31 installation was preserved. At the operator's request the global
+target was changed to 2.7.34 on 2026-09-04. The three unprovisioned hosts tried
+the target once and failed closed with WinTrust `0x800B010A`; they remain
+online on 2.7.31 until the signing root is installed through an authenticated
 administrator or console path.
