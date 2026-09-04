@@ -7,6 +7,17 @@ This dated public platform history begins on 2026-08-24, when the customer-facin
 [View the release notes on vyvick.com](https://vyvick.com/en/platform-release-notes.html)
 
 
+## 2026-09-04 — Native uninstall and signed-update interoperability
+
+- Portal-script installations now register Lira in Windows Apps/Programs with interactive and quiet removal commands. MSI installations keep their Windows Installer registration without a duplicate entry.
+- The generated elevated uninstaller removes the service, watchdog, Credential Provider and Filter registrations, local agent state, and locked files on reboot when required.
+- The release builder now uses the SHA-256 digest-length RSA-PSS salt accepted by the .NET verifier and immediately verifies each generated manifest signature.
+- Update URLs remain restricted to HTTPS. Only configured origins and the two controlled public Lira edges are accepted; arbitrary Host values, external hosts, HTTP, and non-443 ports remain rejected.
+- Forced and scheduled update paths are serialized so heartbeat, WebSocket, and polling delivery cannot launch competing updaters against the same package.
+- Agent 2.7.39 is the global target. Twenty-two of 25 active agents upgraded automatically; three failed closed on missing independent signing-root trust and remain online on 2.7.34 pending manual provisioning.
+- Full backend regression: 552 passed, one opt-in test skipped. [Read the complete 2.7.39 engineering record](../security/release-2.7.39-engineering.md).
+
+
 ## 2026-09-04 — Agent event-collection compatibility fix
 
 - During the staged 2.7.33 rollout, agents continued to heartbeat while their Windows Security event checkpoints stopped advancing.

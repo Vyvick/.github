@@ -6,10 +6,11 @@ Verified history for Lira RDP Windows agent builds. The archive separates comple
 
 ## Complete verified build history
 
-The repository records 47 production agent builds from 2.6.75 through 2.7.34. Test-only packages are excluded.
+The repository records 48 production agent builds from 2.6.75 through 2.7.39. Test-only packages are excluded.
 
 | Version | Date | Record |
 | --- | --- | --- |
+| 2.7.39 | 2026-09-04 | Native Windows uninstall registration and signed-update reliability. |
 | 2.7.34 | 2026-09-04 | Event-collection compatibility and fault-isolation hotfix. |
 | 2.7.33 | 2026-09-03 | Detailed release notes below. |
 | 2.7.32 | 2026-09-03 | Detailed release notes below. |
@@ -61,6 +62,20 @@ The repository records 47 production agent builds from 2.6.75 through 2.7.34. Te
 ## Detailed release notes
 
 The entries below are the releases for which a verified customer-facing change summary is retained. The newest release appears first.
+
+### 2.7.39 — 2026-09-04
+
+**Maintenance and security release — Native uninstall and update-chain reliability**
+
+- Portal-script installations now appear in Windows Apps/Programs and support interactive or quiet removal. MSI-owned installations do not receive a duplicate registration.
+- The generated uninstaller removes the service, watchdog task, Credential Provider and Filter registrations, agent files, local enrollment state, and its Apps entry; locked files are deleted at reboot.
+- Signed manifests use RSA-PSS/SHA-256 with a 32-byte digest-length salt compatible with the pinned .NET verifier. The builder verifies the signature immediately after creation.
+- Package delivery accepts only configured HTTPS origins or the controlled `lira.vyvick.com:443` and `api.vyvick.com:443` public edges. Other origins and ports remain rejected.
+- One update semaphore prevents duplicate updater execution across heartbeat, realtime, and polling delivery.
+- Update ZIP SHA-256: `e4400502278d20cee1e247c94c36a5fa5a7b45b6fe3af30e9265e480b44982d1`; install ZIP SHA-256: `0e4e4b4193f5781becd4a7fa7a7a21863b633860714e50c7e92163ead9227c88`; MSI SHA-256: `233f2e18bb35de5de916ec3dfae95bc1fba47419bea227f16ffb0017fd3afa55`.
+- All six first-party artifacts passed Authenticode. A production canary completed the real automatic update path, registered both uninstall commands, passed PowerShell parsing, executed signed read-only command 2490, and retained healthy collection.
+- The global target is 2.7.39. Twenty-two of 25 active agents upgraded automatically; three remain online on 2.7.34 after failing closed on missing signing-root trust.
+- [Read the complete engineering record](../security/release-2.7.39-engineering.md).
 
 ### 2.7.34 — 2026-09-04
 
