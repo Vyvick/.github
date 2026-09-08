@@ -7,6 +7,16 @@ This dated public platform history begins on 2026-08-24, when the customer-facin
 [View the release notes on vyvick.com](https://vyvick.com/en/platform-release-notes.html)
 
 
+## 2026-09-08 — Safer Server and Endpoint installation
+
+- The Devices area now separates Servers, Endpoints and the combined fleet. Dedicated installation paths provide the matching MSI and PowerShell command for each device class.
+- New installations use a short-lived Install ID instead of exposing enrollment secrets on the Windows service command line. Agent state and update directories are restricted to SYSTEM and Administrators, and installers no longer create broad Microsoft Defender exclusions.
+- Server and Endpoint packages have distinct product identities and reject the wrong Windows class. Lira Endpoint uses a restricted observation profile and reports license consumption separately.
+- The graphical MSI wizard supports all six portal languages. Its installation-directory transition was corrected to prevent Windows Installer error 2819.
+- Signed bootstrap metadata binds the release channel, version, package size and SHA-256 digest. Operational notifications are now readable, failed central-firewall work recovers with bounded retries, and agent-reported blocks receive a defined expiry.
+- The public Windows agent version remains 2.7.39. [Read the complete engineering record](../security/platform-2026-09-08-secure-installation.md).
+
+
 ## 2026-09-04 — Native uninstall and signed-update interoperability
 
 - Portal-script installations now register Lira in Windows Apps/Programs with interactive and quiet removal commands. MSI installations keep their Windows Installer registration without a duplicate entry.
