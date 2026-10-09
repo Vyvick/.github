@@ -1,6 +1,6 @@
 # Lira Agent v3 — public engineering roadmap
 
-Updated: 2026-09-30
+Updated: 2026-10-09
 
 Lira Agent v3 is a new Windows security-agent architecture for Windows Server
 and Windows 10/11. It is being built from operational experience with the
@@ -31,7 +31,7 @@ and no production-readiness claim is made by this document.
 | Area | Status | Public scope |
 |---|---|---|
 | Component boundaries and supervision | Implemented, under test | Independent component health and bounded restart behavior |
-| Enrollment and device identity | Implemented, under test | Enrollment-bound v3 identity and epoch |
+| Enrollment and device identity | Implemented, accepted on Windows 10/11 | Enrollment-bound v3 identity and epoch; non-exportable per-user CNG key |
 | Heartbeat and health reporting | Implemented, under test | Strict v3 contract, component state and monotonic sequence |
 | Local event storage and transport | Implemented, under test | Durable local state and retry without losing acknowledged position |
 | Local RDP attack blocking | Under test | Per-server policy, allowlist and expiring local decisions |
@@ -40,7 +40,8 @@ and no production-readiness claim is made by this document.
 | Windows Server installation | Under test | MSI lifecycle and recovery testing across supported Server releases |
 | Windows 10/11 endpoint installation | Under test | Separate endpoint profile and MSI identity |
 | Windows logon MFA | Safety gate implemented; acceptance pending | Activation remains locked until signed provisioning and the logon/recovery matrix pass |
-| Private access client and tunnel | Planned | Authorized resource access without exposing public RDP |
+| Lira Access enrollment | Implemented, closed preview | Browser PKCE, device invitation, administrator approval/revocation and dual-key rotation; feature remains disabled by default |
+| Private access client and tunnel | In development | Authorized resource access without exposing public RDP; no general-availability claim |
 
 “Implemented, under test” means code and automated checks exist, but the area
 has not completed the full release acceptance matrix. It does not mean general
@@ -59,6 +60,9 @@ availability.
 
 - Windows credentials are not sent through the Lira portal.
 - Endpoint private keys are generated and retained on the endpoint.
+- Standard-user acceptance on Windows 10 and Windows 11 verifies that the Lira
+  Access ECDSA P-256 key is non-exportable and its protected ACL contains only
+  SYSTEM and the owning Windows user.
 - The control plane cannot silently expand the local security ceiling, replace
   trust anchors or disable MFA through an ordinary policy update.
 - MFA activation is fail-safe while v3 provisioning and recovery validation are
@@ -69,6 +73,8 @@ availability.
 ## What is not being announced
 
 - No public Agent v3 download is available yet.
+- Lira Access remains a closed technical preview. Its end-to-end client and
+  tunnel path is not being announced as production-ready.
 - No final release date or compatibility guarantee is being promised yet.
 - Passing an individual automated test or VM scenario is not equivalent to a
   supported production release.

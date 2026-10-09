@@ -3,6 +3,15 @@ Customer-facing updates to the Lira RDP portal and service platform. Windows age
 This dated public platform history begins on 2026-08-24, when the customer-facing release series was introduced. Earlier engineering work is not reconstructed as release history without a retained public release record.
 [View the release notes on vyvick.com](https://vyvick.com/en/platform-release-notes.html)
 
+
+## 2026-10-09 — Lira Agent 3 and Lira Access closed technical preview
+
+- The new Agent 3 architecture separates supervision, event collection, transport, local protection, updates and MFA. The current development build passes 660 managed contract and security checks; this is engineering evidence, not a general-availability claim.
+- Lira Access device identity passed real standard-user acceptance on Windows 10 and Windows 11. Its ECDSA P-256 private key is generated locally in Windows CNG, is non-exportable and has a protected ACL limited to SYSTEM and the owning Windows user.
+- Tenant-scoped device invitations, administrator approval, revocation and dual-key identity rotation are implemented behind a disabled feature flag. The v3 control contract has no generic shell, PowerShell, arbitrary executable or upload-and-execute operation.
+- Lira Access remains a closed technical preview with no public installer. End-to-end client and tunnel validation, public code signing, exact-binary stability testing and independent security review remain release gates.
+- [Read the updated Agent 3 roadmap](../roadmap/agent-v3.md) and [public security model](../security/agent-v3-access-model.md).
+
 ## 2026-09-30 — Lira Agent v3 engineering preview
 
 - Development has started on a new Windows agent architecture for Windows Server and Windows 10/11. Supervision, event collection, transport, local protection, updates and MFA are separated so that a stalled integration cannot silently stop the whole agent.
